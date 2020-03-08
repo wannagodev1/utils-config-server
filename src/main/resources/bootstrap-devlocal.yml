@@ -25,6 +25,7 @@ javamelody:
   enabled: false
 
 logging:
-  file: ./logs/utils-config-server.log
+  file:
+    name: ./logs/utils-config-server.log
 
 info.tags.environment: development
