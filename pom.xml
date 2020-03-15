@@ -49,11 +49,11 @@
     <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
 
     <spring-cloud.version>Hoxton.SR1</spring-cloud.version>
-    <spring-boot-admin.version>2.2.1</spring-boot-admin.version>
+    <spring-boot-admin.version>2.2.12/spring-boot-admin.version>
 
     <javamelody.version>1.82.0</javamelody.version>
 
-    <logstash-gelf.version>1.13.0</logstash-gelf.version>
+    <logstash-gelf.version>1.14.0</logstash-gelf.version>
   </properties>
 
   <dependencies>

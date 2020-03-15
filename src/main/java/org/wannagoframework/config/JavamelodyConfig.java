@@ -31,7 +31,7 @@ public class JavamelodyConfig implements HasLogger {
     String loggerPrefix = getLoggerPrefix("init");
 
     String applicationName =
-        env.getProperty("spring.application.name") + " - " + env.getProperty("ESMS_ENV");
+        env.getProperty("spring.application.name");
 
     String protocol = "http";
     if (env.getProperty("server.ssl.key-store") != null) {
@@ -50,14 +50,16 @@ public class JavamelodyConfig implements HasLogger {
           loggerPrefix + "The host name could not be determined, using `localhost` as fallback");
     }
 
-    String localUrl = String.format("%s://%s:%s%sactuator/monitoring", protocol,
+    String localUrl = String.format("%s://user:none@%s:%s%sactuator", protocol,
         hostAddress,
         serverPort,
         contextPath);
 
     String collectUrl = env.getProperty("COLLECT_URL");
-    logger().debug(loggerPrefix + "Local URL = " + localUrl);
+    logger().debug(loggerPrefix + "Application name = " + applicationName);
     logger().debug(loggerPrefix + "Collect URL = " + collectUrl);
+    logger().debug(loggerPrefix + "Local URL = " + localUrl);
+
     if (collectUrl != null && localUrl != null) {
       try {
         URL collectServerUrl = new URL(collectUrl);
