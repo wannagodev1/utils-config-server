@@ -8,9 +8,11 @@ on: [push]
 env:
   GITHUB_SHA: ${{ github.sha }}
   GITHUB_REF: ${{ github.ref }}
-  IMAGE: wanna-enjoy/utils-config-server
   REGISTRY_HOSTNAME: eu.gcr.io
   PROJECT: wanna-enjoy
+  IMAGE_NAME: utils-config-server
+  IMAGE: $PROJECT/$IMAGE_NAME
+  REMOTE_HOST: wannaenjoy-dev-01
 jobs:
   build:
 
@@ -54,5 +56,5 @@ jobs:
           docker push "$REGISTRY_HOSTNAME"/"$IMAGE":latest
       - name: Deploy
         run: |
-          gcloud beta compute --project $PROJECT ssh wannaenjoy-dev-01 --command \
-                  'docker service update --force --with-registry-auth --image eu.gcr.io/$IMAGE:latest wannaenjoy_utils-config-server'
+          gcloud compute --project $PROJECT ssh $REMOTE_HOST --command \
+                  'docker service update --force --with-registry-auth --image "$REGISTRY_HOSTNAME"/"$IMAGE":latest $IMAGE_NAME'
