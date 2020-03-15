@@ -10,7 +10,7 @@ env:
   GITHUB_REF: ${{ github.ref }}
   IMAGE: wanna-enjoy/utils-config-server
   REGISTRY_HOSTNAME: eu.gcr.io
-
+  PROJECT: wanna-enjoy
 jobs:
   build:
 
@@ -52,3 +52,7 @@ jobs:
           docker push "$REGISTRY_HOSTNAME"/"$IMAGE":"$TAG"
           docker tag "$REGISTRY_HOSTNAME"/"$IMAGE":"$TAG" "$REGISTRY_HOSTNAME"/"$IMAGE":latest
           docker push "$REGISTRY_HOSTNAME"/"$IMAGE":latest
+      - name: Deploy
+        run: |
+          gcloud beta compute --project $PROJECT ssh wannaenjoy-dev-01 --command \
+                  'docker service update --force --with-registry-auth --image eu.gcr.io/$IMAGE:latest wannaenjoy_utils-config-server'
