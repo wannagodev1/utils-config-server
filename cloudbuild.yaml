@@ -18,6 +18,7 @@ steps:
         path: /root/.m2
   - id: 'Compile project'
     name: maven:3.6.0-jdk-11-slim
+    entrypoint: 'mvn'
     args: ['-s', '.settings.xml', '-Dmaven.wagon.http.ssl.insecure=true', 'clean', 'deploy']
     secretEnv: ['NEXUS_PASSWORD']
     env:
