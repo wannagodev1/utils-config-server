@@ -8,18 +8,7 @@ spring:
         enabled: false
     config:
       server.git:
-        uri: ./utils-config-files
-    consul:
-      discovery:
-        prefer-ip-address: true
-        host: localhost
-        port: 8500
-        healthCheckPath: /actuator/health
-        instanceId: utils-config-server:${spring.application.instance-id:${random.value}}
-        service-name: utils-config-server
-      config:
-        watch:
-          enabled: false
+        uri: /Users/clavaud/Development/DevArea/wannaenjoy/config-files
 
 javamelody:
   enabled: false
