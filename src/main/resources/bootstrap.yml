@@ -74,6 +74,8 @@ management:
       show-details: always
     shutdown:
       enabled: true
+    logfile:
+      external-file: /logs/utils-config-server-${ESMS_SERVER}.log
   info:
     git:
       mode: full
@@ -86,6 +88,6 @@ javamelody:
 
 logging:
   file:
-    name: /logs/utils-config-server.log
+    name: /logs/utils-config-server-${ESMS_SERVER}.log
 
 info.tags.environment: development
