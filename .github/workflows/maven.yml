@@ -2,17 +2,6 @@ name: Java CI
 
 on: [push]
 
-# Environment variables available to all jobs and steps in this workflow
-#  GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
-#  GKE_KEY: ${{ secrets.GKE_KEY }}
-env:
-  GITHUB_SHA: ${{ github.sha }}
-  GITHUB_REF: ${{ github.ref }}
-  REGISTRY_HOSTNAME: eu.gcr.io
-  PROJECT: wanna-enjoy
-  IMAGE_NAME: utils-config-server
-  IMAGE: wanna-enjoy/utils-config-server
-  REMOTE_HOST: wannaenjoy-dev-01
 jobs:
   build:
 
@@ -26,35 +15,3 @@ jobs:
           java-version: 1.13
       - name: Build with Maven
         run: mvn -Dmaven.test.skip -s .settings.xml -Dmaven.javadoc.skip -Dossrh_username=${{secrets.ossrh_username}} -Dossrh_password=${{secrets.ossrh_password}} --file pom.xml deploy
-        # Setup gcloud CLI
-      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-        with:
-          version: '284.0.0'
-          service_account_key: ${{ secrets.GCR_KEY }}
-        # Configure docker to use the gcloud command-line tool as a credential helper
-      - run: |
-          # Set up docker to authenticate
-          # via gcloud command-line tool.
-          gcloud auth configure-docker
-
-        # Build the Docker image
-      - name: Build
-        run: |
-          export TAG=`echo $GITHUB_REF | awk -F/ '{print $NF}'`
-          echo $TAG
-          docker build -t "$REGISTRY_HOSTNAME"/"$IMAGE":"$TAG" \
-            --build-arg GITHUB_SHA="$GITHUB_SHA" \
-            --build-arg GITHUB_REF="$GITHUB_REF" .
-
-        # Push the Docker image to Google Container Registry
-      - name: Publish
-        run: |
-          export TAG=`echo $GITHUB_REF | awk -F/ '{print $NF}'`
-          echo $TAG
-          docker push "$REGISTRY_HOSTNAME"/"$IMAGE":"$TAG"
-          docker tag "$REGISTRY_HOSTNAME"/"$IMAGE":"$TAG" "$REGISTRY_HOSTNAME"/"$IMAGE":latest
-          docker push "$REGISTRY_HOSTNAME"/"$IMAGE":latest
-      - name: Deploy
-        run: |
-          gcloud compute --project $PROJECT ssh clavaud@$REMOTE_HOST --command \
-                  'docker service update --force --with-registry-auth --image "$REGISTRY_HOSTNAME"/"$IMAGE":latest $IMAGE_NAME'
