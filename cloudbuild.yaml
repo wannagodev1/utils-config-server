@@ -19,7 +19,7 @@ steps:
   - id: 'Compile project'
     name: maven:3-jdk-13
     entrypoint: 'mvn'
-    args: ['-s', '.settings.xml', '-Dmaven.wagon.http.ssl.insecure=true', 'clean', 'deploy']
+    args: ['-s', '.settings.xml', '-Dmaven.wagon.http.ssl.insecure=true', 'clean', 'install']
     secretEnv: ['NEXUS_PASSWORD']
     env:
       - 'NEXUS_USERNAME=${_NEXUS_USERNAME}'
