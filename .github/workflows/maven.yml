@@ -56,5 +56,5 @@ jobs:
           docker push "$REGISTRY_HOSTNAME"/"$IMAGE":latest
       - name: Deploy
         run: |
-          gcloud compute --project $PROJECT ssh $REMOTE_HOST --command \
+          gcloud compute --project $PROJECT ssh clavaud@$REMOTE_HOST --command \
                   'docker service update --force --with-registry-auth --image "$REGISTRY_HOSTNAME"/"$IMAGE":latest $IMAGE_NAME'
