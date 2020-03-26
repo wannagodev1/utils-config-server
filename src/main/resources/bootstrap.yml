@@ -40,20 +40,12 @@ management:
       show-details: always
     shutdown:
       enabled: true
-    logfile:
-      external-file: /logs/utils-config-server-${SERVER_NAME}.log
   info:
     git:
       mode: full
 
 javamelody:
-  init-parameters:
-    storage-directory: /javamelody
   enabled: true
   management-endpoint-monitoring-enabled: true
-
-logging:
-  file:
-    name: /logs/utils-config-server-${SERVER_NAME}.log
 
 info.tags.environment: development

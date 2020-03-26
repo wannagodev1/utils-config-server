@@ -7,8 +7,9 @@ spring:
       auto-registration:
         enabled: false
     config:
-      server.git:
-        uri: /Users/clavaud/Development/DevArea/wannaenjoy/config-files
+      server:
+        native:
+          search-locations: /Users/clavaud/Development/DevArea/wannaenjoy/config-files
 
 javamelody:
   enabled: false

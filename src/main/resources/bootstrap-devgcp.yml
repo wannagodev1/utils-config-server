@@ -34,3 +34,16 @@ spring:
           mSHVZ+x3LHDcYqFmuG8EXFHFnRz/L4b7U42QLZJSfMwj0cBtpRWTN3W1vmTi6Dox
           h0GK4wMaIlC4lXxDnyGJISLzLFsP7Lt0Q6AFygLaQoAipnCiLxobZA==
           -----END RSA PRIVATE KEY-----
+
+javamelody:
+  init-parameters:
+    storage-directory: /javamelody
+
+management:
+  endpoint:
+    logfile:
+      external-file: /logs/utils-config-server-${SERVER_NAME}.log
+
+logging:
+  file:
+    name: /logs/utils-config-server-${SERVER_NAME}.log
