@@ -6,16 +6,18 @@ spring:
     service-registry:
       auto-registration:
         enabled: false
-    config:
-      server:
-        native:
-          search-locations: /Users/clavaud/Development/DevArea/wannaenjoy/config-files
 
-javamelody:
-  enabled: false
+management:
+  endpoint:
+    logfile:
+      external-file: ./logs/utils-config-server.log
 
 logging:
   file:
     name: ./logs/utils-config-server.log
+
+javamelody:
+  init-parameters:
+    storage-directory: ./javamelody
 
 info.tags.environment: development
