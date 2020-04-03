@@ -20,4 +20,4 @@ javamelody:
   init-parameters:
     storage-directory: ./javamelody
 
-info.tags.environment: development
+info.tags.environment: local
