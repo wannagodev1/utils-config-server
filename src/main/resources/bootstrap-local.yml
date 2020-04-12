@@ -7,6 +7,11 @@ spring:
       auto-registration:
         enabled: false
 
+app:
+  firebase:
+    serviceAccountFile: ./data/firebase-service-account.json
+    project-id: dabago-4bd20
+
 management:
   endpoint:
     logfile:
