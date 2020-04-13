@@ -10,7 +10,7 @@ spring:
 app:
   firebase:
     serviceAccountFile: ./data/firebase-service-account.json
-    project-id: dabago-4bd20
+    project-id: dabago-365f8
 
 management:
   endpoint:
