@@ -72,6 +72,7 @@ public class SecurityConfig {
                   .requestMatchers(EndpointRequest.toAnyEndpoint()).hasRole("MONITORING")
                   .anyRequest().permitAll()
           ).httpBasic(Customizer.withDefaults());
+      http.cors();
     }
   }
 
@@ -81,10 +82,11 @@ public class SecurityConfig {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
       http
-          .authorizeRequests(authorize -> authorize
-              .anyRequest().authenticated()
-          )
-          .httpBasic(Customizer.withDefaults());
+              .authorizeRequests(authorize -> authorize
+                      .anyRequest().authenticated()
+              )
+              .httpBasic(Customizer.withDefaults());
+      http.cors();
     }
   }
 }
