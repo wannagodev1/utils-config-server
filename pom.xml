@@ -37,7 +37,7 @@
   <name>Wanna Go Framework - Config Server</name>
 
   <properties>
-    <java.version>14</java.version>
+    <java.version>13</java.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
